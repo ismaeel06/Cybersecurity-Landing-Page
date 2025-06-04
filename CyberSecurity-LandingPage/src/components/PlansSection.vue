@@ -1,6 +1,24 @@
 <script setup lang="ts">
+import { ref, onMounted } from 'vue';
 import PlanCard from './PlanCard.vue';
 import { ShieldCheck, Shield, ShieldAlert } from 'lucide-vue-next';
+
+const isVisible = ref(false);
+
+onMounted(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        isVisible.value = true;
+      }
+    });
+  });
+  
+  const element = document.getElementById('plans');
+  if (element) {
+    observer.observe(element);
+  }
+});
 
 // Plan data
 const plans = [
@@ -17,7 +35,8 @@ const plans = [
       "Password help",
       "Wi-Fi monitoring"
     ],
-    recommended: false
+    recommended: false,
+    badge: "Starter"
   },
   {
     id: 2,
@@ -33,7 +52,8 @@ const plans = [
       "Firewall monitoring",
       "Cloud setup & support"
     ],
-    recommended: true
+    recommended: true,
+    badge: "Most Popular"
   },
   {
     id: 3,
@@ -50,24 +70,26 @@ const plans = [
       "Emergency priority",
       "Custom security solutions"
     ],
-    recommended: false
+    recommended: false,
+    badge: "Enterprise"
   }
 ];
 </script>
 
 <template>
-  <section id="plans" class="py-20 bg-white dark:bg-navy transition-colors">
+  <section id="plans" class="py-20 bg-white dark:bg-navy transition-all duration-500">
     <div class="container mx-auto px-4">
-      <div class="text-center mb-16">
-        <h2 class="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">Our Protection Plans</h2>
-        <p class="text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+      <div :class="['text-center mb-16 transform transition-all duration-1000', isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0']">        <h2 class="text-3xl md:text-4xl font-bold text-navy dark:text-white mb-4">
+          Our Protection <span class="text-gold">Plans</span>
+        </h2>
+        <p class="text-navy-light dark:text-gray-300 max-w-2xl mx-auto text-lg">
           Choose the level of protection that's right for your business. All plans include core security features with no long-term contracts.
         </p>
       </div>
       
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto">
         <PlanCard 
-          v-for="plan in plans" 
+          v-for="(plan, index) in plans" 
           :key="plan.id"
           :name="plan.name"
           :price="plan.price"
@@ -76,6 +98,9 @@ const plans = [
           :description="plan.description"
           :features="plan.features"
           :recommended="plan.recommended"
+          :badge="plan.badge"
+          :index="index"
+          :is-visible="isVisible"
         />
       </div>
     </div>
