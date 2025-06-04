@@ -25,17 +25,17 @@
   darkMode: 'class';
 }
 
+/* Light mode base styles - these need to be explicitly set */
+html {
+  background-color: white !important;
+  color: var(--color-navy) !important;
+}
+
 /* Dark mode base styles */
 html.dark {
   color-scheme: dark;
   background-color: var(--color-navy) !important;
   color: white !important;
-}
-
-/* Light mode base styles */
-html {
-  background-color: white !important;
-  color: var(--color-navy) !important;
 }
 
 /* Custom colors using CSS variables */
@@ -55,12 +55,28 @@ html {
   .text-navy {
     color: var(--color-navy);
   }
+  .text-navy-light {
+    color: var(--color-navy-light);
+  }
   .text-gold {
     color: var(--color-gold);
   }
 }
 
-/* Dark mode utilities with higher specificity for Tailwind classes */
+/* Ensure dark mode utilities have higher specificity */
+html:not(.dark) .bg-white {
+  background-color: white !important;
+}
+
+html:not(.dark) .text-navy {
+  color: var(--color-navy) !important;
+}
+
+html:not(.dark) .text-navy-light {
+  color: var(--color-navy-light) !important;
+}
+
+/* Dark mode utilities with higher specificity */
 html.dark .dark\:bg-navy {
   background-color: var(--color-navy) !important;
 }
@@ -77,19 +93,38 @@ html.dark .dark\:text-gold {
   color: var(--color-gold) !important;
 }
 
-html.dark .dark\:text-gray-200 {
-  color: #e5e7eb !important;
-}
-
-html.dark .dark\:text-gray-300 {
-  color: #d1d5db !important;
-}
-
 /* Smooth transitions */
 .transition-colors, html, body, #app, * {
   transition-property: background-color, border-color, color, fill, stroke;
   transition-duration: 300ms;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Interactive elements */
+button, a, [role="button"] {
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+button:focus, a:focus, [role="button"]:focus {
+  outline: 2px solid var(--color-gold);
+  outline-offset: 2px;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 0.375rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Hero animations */
@@ -131,4 +166,31 @@ html.dark .dark\:text-gray-300 {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+/* Ripple effect for buttons */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple::after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.3);
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  transform: scale(0);
+  opacity: 0;
+  transition: transform 0.5s, opacity 0.5s;
+}
+
+.ripple:active::after {
+  transform: scale(2);
+  opacity: 0;
+  transition: 0s;
 }
