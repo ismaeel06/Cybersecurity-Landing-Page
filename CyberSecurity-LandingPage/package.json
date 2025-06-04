@@ -1,0 +1,36 @@
+{
+  "name": "miniguardtech-landing",
+  "private": true,
+  "version": "1.0.0",
+  "description": "MiniGuardTech - Cybersecurity Landing Page for small businesses",
+  "author": "MiniGuardTech Team",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc -b && vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .vue,.js,.ts --fix",
+    "deploy": "npm run build && npm run copy-200",
+    "copy-200": "powershell -Command \"Copy-Item dist/index.html dist/200.html\"",
+    "optimize-images": "node scripts/optimize-images.js"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.8",
+    "@tailwindcss/vite": "^4.1.8",
+    "autoprefixer": "^10.4.21",
+    "lucide-vue-next": "^0.513.0",
+    "motion": "^12.16.0",
+    "postcss": "^8.5.4",
+    "tailwindcss": "^4.1.8",
+    "vue": "^3.5.13"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^5.2.3",
+    "@vue/tsconfig": "^0.7.0",
+    "sharp": "^0.34.2",
+    "terser": "^5.40.0",
+    "typescript": "~5.8.3",
+    "vite": "^6.3.5",
+    "vue-tsc": "^2.2.8"
+  }
+}

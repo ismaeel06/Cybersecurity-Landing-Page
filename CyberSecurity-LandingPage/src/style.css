@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/* Base styles */
+:root {
+  line-height: 1.5;
+  font-weight: 400;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+}
+
+/* Theme customization */
+@theme {
+  --color-navy: #011627;
+  --color-gold: #FEE440;
+  --color-navy-light: #19273C;
+  --color-navy-dark: #000C18;
+  --font-sans: 'Inter', ui-sans-serif, system-ui;
+}
+
+/* Define dark mode strategy */
+@tailwindcss {
+  darkMode: 'class';
+}
+
+/* Dark mode base styles */
+html.dark {
+  color-scheme: dark;
+  background-color: var(--color-navy) !important;
+  color: white !important;
+}
+
+/* Light mode base styles */
+html {
+  background-color: white !important;
+  color: var(--color-navy) !important;
+}
+
+/* Custom colors using CSS variables */
+@layer utilities {
+  .bg-navy {
+    background-color: var(--color-navy);
+  }
+  .bg-gold {
+    background-color: var(--color-gold);
+  }
+  .bg-navy-light {
+    background-color: var(--color-navy-light);
+  }
+  .bg-navy-dark {
+    background-color: var(--color-navy-dark);
+  }
+  .text-navy {
+    color: var(--color-navy);
+  }
+  .text-gold {
+    color: var(--color-gold);
+  }
+}
+
+/* Dark mode utilities with higher specificity for Tailwind classes */
+html.dark .dark\:bg-navy {
+  background-color: var(--color-navy) !important;
+}
+
+html.dark .dark\:bg-navy-light {
+  background-color: var(--color-navy-light) !important;
+}
+
+html.dark .dark\:text-white {
+  color: white !important;
+}
+
+html.dark .dark\:text-gold {
+  color: var(--color-gold) !important;
+}
+
+html.dark .dark\:text-gray-200 {
+  color: #e5e7eb !important;
+}
+
+html.dark .dark\:text-gray-300 {
+  color: #d1d5db !important;
+}
+
+/* Smooth transitions */
+.transition-colors, html, body, #app, * {
+  transition-property: background-color, border-color, color, fill, stroke;
+  transition-duration: 300ms;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Hero animations */
+.hero-animate {
+  animation: fadeInUp 0.8s ease forwards;
+  opacity: 0;
+}
+
+.hero-animate:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.hero-animate:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Success message animation */
+.success-message {
+  animation: fadeInScale 0.5s ease forwards;
+}
+
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
