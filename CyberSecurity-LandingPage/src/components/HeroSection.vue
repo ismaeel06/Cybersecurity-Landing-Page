@@ -63,12 +63,12 @@ const scrollToSection = (sectionId: string) => {
               
               <!-- Secondary button - adjusted for better visibility in both modes -->
               <button 
-                @click="scrollToSection('services')"
-                class="group px-8 py-4 bg-transparent border-2 border-navy dark:border-gold text-navy dark:text-gold hover:bg-navy hover:text-white dark:hover:bg-gold dark:hover:text-black rounded-lg transition-all duration-300 text-center shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
-              >
-                See Our Services
-                <Shield class="ml-2 w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
-              </button>
+              @click="scrollToSection('services')"
+              class="group px-8 py-4 bg-transparent border-2 border-navy dark:border-gold text-navy dark:text-gold hover:bg-navy hover:text-white dark:hover:bg-gold dark:hover:text-navy dark:hover:!text-navy rounded-lg transition-all duration-300 text-center shadow-lg hover:shadow-xl transform hover:-translate-y-1 flex items-center justify-center"
+            >
+              See Our Services
+              <Shield class="ml-2 w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+            </button>
             </div>
           </div>
         </div>
@@ -85,7 +85,7 @@ const scrollToSection = (sectionId: string) => {
               <div>
                 <h2 class="text-2xl md:text-3xl font-bold">
                   <span class="text-white">MiniGuard</span>
-                  <span class="text-gold">Tech</span>
+                  <span class="text-gold">Tech</span>a
                 </h2>
                 <p class="text-sm text-gray-300">Big Protection. Always Got Your Back.</p>
               </div>
